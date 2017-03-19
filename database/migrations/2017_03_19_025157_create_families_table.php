@@ -17,10 +17,10 @@ class CreateFamiliesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('slug')->unique();
-            $table->string('address');
-            $table->string('city');
-            $table->string('state');
-            $table->string('zip');
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('zip')->nullable();
             $table->string('phone')->nullable();
             $table->string('anniversary')->nullable();
             $table->string('photo')->nullable();

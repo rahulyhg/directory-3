@@ -1,6 +1,6 @@
 
     <div class="col-md-9">
-        {{ session('family') }}
+        <p>TEMP: {{ session('family') }}</p>
         <div class="panel panel-info">
             <div class="panel-heading">
                 <i class="fa fa-users" aria-hidden="true"></i>Family Information

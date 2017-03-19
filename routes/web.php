@@ -11,36 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+// Home, All diretory index
+Route::get('/', 'FamilyController@index');
+
+// All other resource routes
+Route::resource('family', 'FamilyController');
+
+// Admin dashboard
+Route::get('admin', 'FamilyController@admin');
 
 
-// STATIC STORAGE FILES
+// Member resources
+Route::resource('members', 'MemberController');
+
+
+// Static, storage files
 Route::get('public/{dir}/{file}', 'StaticFileController@show')->middleware('auth');
 
 Route::get('public/{dir}/thb/{file}', 'StaticFileController@showThb')->middleware('auth');
-
-
-// FAMILIES
-
-// Admin dashboard
-Route::get('directory/dashboard', 'FamilyController@dashboard');
-
-Route::get('directory', 'FamilyController@index');
-
-Route::get('directory/{family_slug}', 'FamilyController@show');
-
-// Photo upload
-Route::post('directory/{family_id}/photo', 'FamilyController@addPhoto');
-
-// All other resource routes
-Route::resource('families', 'FamilyController');
-
-
-// MEMBERS
-Route::resource('members', 'MemberController');

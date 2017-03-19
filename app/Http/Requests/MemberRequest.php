@@ -26,13 +26,13 @@ class MemberRequest extends FormRequest
           return [
               'first_name' => 'required|min:3|alpha_dash',
               'last_name' => 'required|min:3|alpha_dash',
-              'email' => 'email',
-              'mobile' => ['regex:/^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$/'],
-              'birthday' => 'date',
+              'email' => 'nullable|email',
+              'mobile' => ['nullable', 'regex:/^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$/'],
+              'birthday' => 'nullable|date',
               'family_id' => 'required',
               'family_role_id' => 'required',
               'gender' => 'required',
-              'user_id' => 'integer',
+              'user_id' => 'nullable|integer',
               'status_id' => 'required',
           ];
       }

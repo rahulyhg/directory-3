@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="form-group @if ($errors->has('slug')) has-error @endif">
-                    {!! Form::label('slug', 'Family Slug') !!}<span class="slugjs-field">({{ env('APP_URL') }}/directory/<span class="slugjs-uri"></span>) <a class="slugjs-edit">Edit</a></span>
+                    {!! Form::label('slug', 'Family Slug') !!} <span class="slugjs-field">({{ env('APP_URL') }}/family/<span class="slugjs-uri"></span>)</span>
                     {!! Form::text('slug', null, ['class' => 'form-control slugjs-slug', 'id' => 'family-slug']) !!}
                     @if ($errors->has('slug')) <p class="help-block error">{{ $errors->first('slug') }}</p> @endif
                 </div>
@@ -106,15 +106,15 @@
                 <i class="fa fa-camera" aria-hidden="true"></i>Family Photo
             </div>
             <div class="panel-body">
-                <?php //if(isset($family)) { ?>
+                <?php if(isset($family)) { ?>
                 <img style="max-width: 100%;" src="/public/directory/thb/{{ $family->thumbnail }}" alt="{{ $family->name }}">
-                <?php //} else { ?>
+                <?php } else { ?>
                     <label style="cursor:pointer; text-align:center; display:block; padding:10px; color:#CCC; font-weight:normal;" for="family-photo">
                         <i style="font-size:30px; margin:0;" class="fa fa-upload" aria-hidden="true"></i><br />
                         <span style="font-size:14px;">Upload a Photo</span>
                     </label>
                     {!! Form::file('photo', ['id' => 'family-photo', 'class' => 'hidden']) !!}
-                <?php //} ?>
+                <?php } ?>
                 <div class="form-group @if ($errors->has('photo')) has-error @endif">
                     @if ($errors->has('photo')) <p class="help-block error">{{ $errors->first('photo') }}</p> @endif
                 </div>

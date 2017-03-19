@@ -18,7 +18,7 @@ class FamilyController extends Controller
 
 
     // List all Families in Admin dashboard
-    public function dashboard(Request $request)
+    public function admin(Request $request)
     {
         // If sorting by user (a get from the request)
         if ($request->sort_by) {
@@ -35,14 +35,14 @@ class FamilyController extends Controller
 
         }
 
-        return view('directory.dashboard', compact('families'));
+        return view('directory.admin', compact('families'));
     }
 
 
     public function index()
     {
 
-        $families = Family::all();
+        $families = Family::where('status_id', 1)->get();
 
         $families = $families->sortBy('name');
 
@@ -108,7 +108,7 @@ class FamilyController extends Controller
 
         flash()->success('The family was updated.');
 
-        return redirect('directory/dashboard');
+        return redirect('admin');
     }
 
 
@@ -120,7 +120,7 @@ class FamilyController extends Controller
 
         flash()->success('The family and members were deleted.');
 
-        return redirect('directory/dashboard');
+        return redirect('admin');
     }
 
 

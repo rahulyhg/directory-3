@@ -77,7 +77,7 @@ class MemberController extends Controller
 
         flash()->success('The member was updated.');
 
-        return redirect('directory/dashboard');
+        return redirect('/admin');
     }
 
 
@@ -88,7 +88,7 @@ class MemberController extends Controller
 
         flash()->success('The member was deleted.');
 
-        return redirect('directory/dashboard');
+        return redirect('/admin');
     }
 
 }

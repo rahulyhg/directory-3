@@ -16,10 +16,10 @@
             <div class="row clearfix">
 
                 @foreach($fams as $family)
-                <div class="family-unit col-xs-6 col-md-4">
+                <div class="family-unit col-xs-12 col-md-6 col-lg-4">
 
                     <div class="family-photo">
-                        <a href="/directory/{{ $family->slug }}">
+                        <a href="{{ action('FamilyController@show', ['slug' => $family->slug]) }}">
                             @if($family->thumbnail)
                                 <img src="/public/directory/thb/{{ $family->thumbnail }}" alt="{{ $family->name }}" />
                             @else
@@ -29,7 +29,7 @@
                     </div>
                     <div class="family-name">
                         <h4>
-                            <a href="/directory/{{ $family->slug }}">{{ $family->name }}</a>
+                            <a href="{{ action('FamilyController@show', ['slug' => $family->slug]) }}">{{ $family->name }}</a>
                         </h4>
                     </div>
                     <div class="family-members">
@@ -37,7 +37,13 @@
                         @foreach ($family->members as $member)
                             @if($member->family_role_id == 1)
                                 {{ $member->first_name }}
-                            @elseif($member->family_role_id == 2)
+                            @endif
+                        @endforeach
+                        </span>
+
+                        <span class="family-spouse">
+                        @foreach ($family->members as $member)
+                            @if($member->family_role_id == 2)
                                 &amp; {{ $member->first_name }}
                             @endif
                         @endforeach

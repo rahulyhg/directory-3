@@ -31,28 +31,20 @@
                         @if ($member->email){{ $member->email }}<br />@endif
                         @if ($member->mobile){{ $member->mobile }}<br />@endif
                         @if ($member->birthday){{ $member->birthday->format('F j') }}<br />@endif
-
-                        @if ($member->christian)
-                            Christian
-                        @endif
                     </li>
                 @endforeach
             </ul>
 
             <hr />
 
-
             <div class="action-btns">
-                <a href="/families/{{ $family->slug }}/edit" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</a>
-                <form method="POST" action="/families/{{ $family->id }}" style="float:right;">
+                <a href="{{ action('FamilyController@edit', ['slug' => $family->slug]) }}" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Edit</a>
+                <form method="POST" action="{{ action('FamilyController@destroy', ['id' => $family->id]) }}" style="float:right;">
                     {!! csrf_field() !!}
                     {{ method_field('DELETE') }}
                     <button type="submit" class="btn btn-danger" onclick="if ( ! confirm('Are you sure you want to delete this family and its members? Set the family status to Closed if unsure.') ) return false;"><i class="fa fa-trash"></i> Delete</button>
                 </form>
             </div>
-
-
-
 
         </div>
     </div>

@@ -31,8 +31,8 @@ class FamiliesTableSeeder extends Seeder
                  'phone' => $faker->phoneNumber,
                  'anniversary' => Carbon::createFromTimeStamp($faker->dateTimeBetween('-100 years', 'now')->getTimestamp()),
                  //'photo' => $faker->imageUrl($width = 640, $height = 480),
-                 'photo' => 'sample-photo.jpg',
-                 'thumbnail' => 'sample-thumb.jpg',
+                //  'photo' => 'sample-photo.jpg',
+                //  'thumbnail' => 'sample-thumb.jpg',
                  'status_id' => 1,
              ]);
          }

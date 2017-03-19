@@ -1,9 +1,151 @@
 
-// Fonts
-@import url(https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i);
+/*  IMPORTS
+    ----------------------------------------- */
 
-// Variables
-@import "variables";
+    // Fonts
+    @import url(https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i);
 
-// Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+    // Variables
+    @import "variables";
+
+    // Bootstrap
+    @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+/*  GLOBALS
+    ----------------------------------------- */
+
+    body { font-family: 'Lato', sans-serif; background: transparent; }
+
+    hr { margin: 40px 0; }
+
+    i { margin-right: 10px; }
+
+    a.btn.disabled { color: #eee; }
+
+
+/*  ANIMATIONS
+    ----------------------------------------- */
+
+    @keyframes fadein {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+
+
+/*
+    FLASH MESSAGING
+    ----------------------------------------- */
+
+    .flash-message-box { position: fixed; z-index: 999; right: 50px; bottom: 50px; padding: 14px 30px; box-shadow: 0px 2px 20px 1px rgba(0,0,0,0.3);
+
+        button.close { margin: 2px 0 0 24px; }
+    }
+
+
+/*
+    NAVIGATION
+    ----------------------------------------- */
+
+    .navbar-default { padding: 15px 0; margin-bottom: 0px; border: 0;
+
+        .navbar-header {  }
+
+        .navbar-brand { margin-right: 30px; }
+
+        .navbar-nav li > a {
+            line-height: 30px;
+        }
+
+        .dropdown-menu li > a {
+            line-height: 20px;
+        }
+    }
+
+    // Subpage, vertical sidebar navigation
+    .subnav {
+
+        li {
+
+            a { display: block; font-size: 16px; line-height: 34px; font-weight: 700; padding: 10px 0; }
+        }
+
+        li + li { border-top: 1px solid #eee; }
+    }
+
+
+/*
+    HEADERS
+    ----------------------------------------- */
+
+    h1 { margin-bottom: 30px; }
+
+    h1 .pull-right .btn { margin-top: -10px; }
+
+
+/*  CONTENT WRAPPERS
+    ----------------------------------------- */
+
+    .wrap { padding: 40px 0; }
+
+
+/*  DIRECTORY INDEX
+    ----------------------------------------- */
+
+    .family-unit { margin-bottom: 20px; animation: fadein 1s; }
+
+    .family-photo { padding: 10px; background: #eee;
+
+        img { width: 100%; opacity: 0.8; transition: all 0.5s ease; }
+
+        img:hover { opacity: 1; }
+    }
+
+    .family-name h4 { margin-bottom: 5px; }
+
+    .family-head, .family-spouse { font-weight: 600; }
+
+    .family-kids { font-size: 80%; }
+
+
+/*  ADMIN FORMS
+    ----------------------------------------- */
+
+    .fa-btn { margin-right: 6px; }
+
+    .uri { font-weight: 700; }
+
+    .has-error label { color: #a94442; }
+
+    i[class*=" fa-sort"] { margin-right: 0; margin-left: 5px; }
+
+    .action-btns-no-text {
+
+        i { margin-right: 0; }
+    }
+
+    .table > tbody > tr > td { vertical-align: middle; }
+
+    .checkbox input, .checkbox label { line-height: 1.2; }
+
+    input[type=checkbox] + label { margin-left: 10px; }
+
+    .status-toggle {
+
+        p { padding: 10px; border-radius: 6px; transition: all 0.5s ease; }
+
+        p i { font-size: 28px; cursor: pointer; margin-top: -3px; }
+    }
+
+    .errors { padding: 30px; border-radius: 10px; margin-bottom: 30px;
+
+        h4 { margin: 0 0 15px; }
+
+        ul { margin: 0; }
+    }
+
+    .slugjs-field { margin-left: 10px; color: #999; font-size: 90%;
+
+        .slugjs-uri { background: #fcf8e3; color: #222; font-weight: 600; }
+
+    }
