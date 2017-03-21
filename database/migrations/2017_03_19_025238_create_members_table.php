@@ -23,7 +23,7 @@ class CreateMembersTable extends Migration
             $table->string('email')->nullable();
             $table->string('birthday')->nullable();
             $table->string('mobile')->nullable();
-            $table->string('gender');
+            $table->string('gender')->nullable();
             $table->integer('status_id');
             $table->timestamps();
         });

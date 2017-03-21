@@ -215,4 +215,20 @@ class FamilyController extends Controller
 
         return $family;
     }
+
+
+    // Remove the current family photo
+    public function removePhoto($slug)
+    {
+        // WIP...
+
+        $family = Family::where('slug', $slug)->firstOrFail();
+
+        $family->photo = NULL;
+        $family->thumbnail = NULL;
+
+        $family->save();
+
+        return back();
+    }
 }

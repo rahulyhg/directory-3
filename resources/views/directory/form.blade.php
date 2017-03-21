@@ -1,7 +1,7 @@
 
     <div class="col-md-9">
 
-        <div class="panel panel-default">
+        <div class="panel panel-info">
             <div class="panel-heading">
                 <i class="fa fa-users" aria-hidden="true"></i>Family Information
             </div>
@@ -105,9 +105,11 @@
             <div class="panel-heading">
                 <i class="fa fa-camera" aria-hidden="true"></i>Family Photo
             </div>
-            <div class="panel-body">
-                <?php if(isset($family)) { ?>
-                <img style="max-width: 100%;" src="/public/directory/thb/{{ $family->thumbnail }}" alt="{{ $family->name }}">
+            <div class="panel-body panel-family-photo">
+                <?php if(isset($family) && isset($family->thumbnail)) { ?>
+                    <img style="max-width: 100%;" src="/public/directory/thb/{{ $family->thumbnail }}" alt="{{ $family->name }}">
+                    <a class="btn btn-delete"><i class="fa fa-times" aria-hidden="true"></i></a>
+
                 <?php } else { ?>
                     <label style="cursor:pointer; text-align:center; display:block; padding:10px; color:#CCC; font-weight:normal;" for="family-photo">
                         <i style="font-size:30px; margin:0;" class="fa fa-upload" aria-hidden="true"></i><br />
@@ -115,6 +117,7 @@
                     </label>
                     {!! Form::file('photo', ['id' => 'family-photo', 'class' => 'hidden']) !!}
                 <?php } ?>
+
                 <div class="form-group @if ($errors->has('photo')) has-error @endif">
                     @if ($errors->has('photo')) <p class="help-block error">{{ $errors->first('photo') }}</p> @endif
                 </div>
@@ -126,6 +129,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-users" aria-hidden="true"></i>Family Members
+                    <span class="action-btns-no-text pull-right"><a href="/members/create" class="btn btn-default" style="padding: 0 6px" title="Add a Member"><i class="fa fa-plus"></i></a></span>
                 </div>
                 <div class="panel-body">
                     @foreach($members as $member)

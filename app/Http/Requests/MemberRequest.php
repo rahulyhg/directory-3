@@ -31,7 +31,7 @@ class MemberRequest extends FormRequest
               'birthday' => 'nullable|date',
               'family_id' => 'required',
               'family_role_id' => 'required',
-              'gender' => 'required',
+              'gender' => 'nullable|required',
               'user_id' => 'nullable|integer',
               'status_id' => 'required',
           ];
