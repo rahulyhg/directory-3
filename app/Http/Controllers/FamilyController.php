@@ -7,6 +7,7 @@ use App\Family;
 use App\Member;
 use App\Http\Requests\FamilyRequest;
 use Image;
+use Illuminate\Support\Facades\Storage;
 
 
 class FamilyController extends Controller
@@ -190,14 +191,14 @@ class FamilyController extends Controller
         $family->phone = $request->phone;
 
         if($request->photo) {
-            // Photo...
+            // Image processing using Intervention: http://image.intervention.io/api/fit
             $file = time() . '_' . $request->file('photo')->getClientOriginalName();
             $path = 'public/directory/';
             $thb_path = storage_path('app/public/directory/thb/');
 
             // Make thumbnail
             $img = Image::make($request->file('photo'));
-            $img->resize(320, 240);
+            $img->fit(320, 240);
             $img->save($thb_path . 'thb_' . $file);
 
             // Save thumbnail size photo
@@ -220,15 +221,19 @@ class FamilyController extends Controller
     // Remove the current family photo
     public function removePhoto($slug)
     {
-        // WIP...
-
         $family = Family::where('slug', $slug)->firstOrFail();
 
+        // Unlink files in storage
+        // Note: had to chmod 0777 on 'directory' and 'thb'...
+        Storage::delete('/public/directory/' . $family->photo);
+        Storage::delete('/public/directory/thb/' . $family->thumbnail);
+
+        // Update database
         $family->photo = NULL;
         $family->thumbnail = NULL;
 
         $family->save();
 
-        return back();
+        return 'deleted';
     }
 }

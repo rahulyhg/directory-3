@@ -9,8 +9,10 @@
 
         <div class="col-sm-12 col-md-9 col-md-offset-1">
 
+            @if($family->thumbnail)
             <div style="float:right;"><img src="/public/directory/thb/{{ $family->thumbnail }}" alt="{{ $family->name }}"></div>
-
+            @endif
+            
             <h1>{{ $family->name }}</h1>
 
             <hr />
