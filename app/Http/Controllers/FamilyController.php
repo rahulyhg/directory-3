@@ -234,6 +234,26 @@ class FamilyController extends Controller
 
         $family->save();
 
-        return 'deleted';
+        return response()->json([
+            'data' => [
+                'photo' => NULL,
+                'thumbnail' => NULL
+            ]
+        ], 200);
     }
+
+
+    // Retrieve family photo
+    public function getPhoto($slug)
+    {
+        $family = Family::where('slug', $slug)->firstOrFail();
+
+        return response()->json([
+            'data' => [
+                'photo' => '/public/directory/' . $family->photo,
+                'thumbnail' => '/public/directory/thb/' . $family->thumbnail
+            ]
+        ], 200);
+    }
+
 }

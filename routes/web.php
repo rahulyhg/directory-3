@@ -16,8 +16,10 @@ Auth::routes();
 // Home, All diretory index
 Route::get('/', 'FamilyController@index');
 
+Route::get('family/{slug}/photo', 'FamilyController@getPhoto');
+
 // Delete a family photo
-Route::patch('family/{slug}/photo', 'FamilyController@removePhoto');
+Route::delete('family/{slug}/photo', 'FamilyController@removePhoto');
 
 // All other resource routes
 Route::resource('family', 'FamilyController');
