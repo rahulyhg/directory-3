@@ -153,10 +153,32 @@
     // Edit Family: Photo Panel
     .panel-family-photo { position: relative; }
 
-    a.btn-delete { position: absolute; top: 25px; right: 25px; padding: 2px 8px; margin: 0;
-        background-color: rgba(255,255,255,0.4); border-radius: 16px; color: #555; transition: all 0.5s ease;
+    // Family-photo Vue component
+    .family-photo-wrap {
 
-        i { margin: 0; padding: 0; }
+        img { max-width: 100%; }
+
+        i.fa-cog { padding: 10px; color: #CCC; }
+
+        label { cursor: pointer; text-align: center; display: block; padding: 10px; color: #CCC; font-weight: normal;
+
+            i { font-size:30px; margin:0; }
+
+            span { font-size:14px; }
+        }
+
+        a.btn-delete { position: absolute; top: 25px; right: 25px; padding: 2px 8px; margin: 0;
+            background-color: rgba(255,255,255,0.4); border-radius: 16px; color: #555; transition: all 0.5s ease;
+
+            i { margin: 0; padding: 0; }
+        }
+
+        a.btn-delete:hover { background-color: rgba(255,255,255,0.8); color: #333; }
+
+        .preview-window { max-height: 170px; overflow: hidden;
+
+            img { }
+
+            a { }
+        }
     }
-
-    a.btn-delete:hover { background-color: rgba(255,255,255,0.8); color: #333; }

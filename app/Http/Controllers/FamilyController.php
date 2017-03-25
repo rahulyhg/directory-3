@@ -198,7 +198,14 @@ class FamilyController extends Controller
 
             // Make thumbnail
             $img = Image::make($request->file('photo'));
-            $img->fit(320, 240);
+            $img->fit(
+                320, 
+                240,
+                function ($constraint) {
+                    $constraint->upsize();
+                },
+                'top'
+            );
             $img->save($thb_path . 'thb_' . $file);
 
             // Save thumbnail size photo

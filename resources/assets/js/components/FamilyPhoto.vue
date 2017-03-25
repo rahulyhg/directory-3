@@ -1,21 +1,28 @@
 <template>
     <div class="family-photo-wrap">
 
-        <div v-if="loading">
+        <div v-if="loading" class="text-center">
             <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
         </div>
 
         <div v-else>
             <div v-if="set">
-                <img style="max-width: 100%;" v-bind:src="images.data.thumbnail">
+                <img v-bind:src="images.data.thumbnail">
                 <a class="btn btn-delete" @click="removeFamilyPhoto"><i class="fa fa-times" aria-hidden="true"></i></a>
             </div>
+
             <div v-else>
-                <label style="cursor:pointer; text-align:center; display:block; padding:10px; color:#CCC; font-weight:normal;" for="family-photo">
-                    <i style="font-size:30px; margin:0;" class="fa fa-upload" aria-hidden="true"></i><br />
-                    <span style="font-size:14px;">Upload a Photo</span>
-                    <input type="file" name="photo" id="family-photo" accept="image/*" class="hidden">
+                <div v-show="imgSrc" class="preview-window">
+                    <img :src="imgSrc">
+                    <a @click="clearThumbnail" class="btn btn-delete"><i class="fa fa-times" aria-hidden="true"></i></a>
+                </div>
+
+                <label for="family-photo">
+                    <i class="fa fa-upload" aria-hidden="true"></i><br />
+                    <span>Upload a Photo</span>
+                    <input type="file" name="photo" id="family-photo" accept="image/*" @change="previewThumbnail" class="hidden">
                 </label>
+
             </div>
         </div>
 
@@ -33,7 +40,8 @@
                 'loading': true,
                 'set': false,
                 'errors': false,
-                'message': ''
+                'message': '',
+                'imgSrc': ''
             }
         },
 
@@ -55,10 +63,31 @@
                     }.bind(this))
 
                     .catch(function(response){
-                        console.log('no?')
+                        // console.log('no photo found');
                         this.loading = false;
                     }.bind(this));
             }, // checkIfSet()
+
+
+            previewThumbnail: function(event) {
+                // http://taha-sh.com/blog/quick-tip-how-to-use-vuejs-to-preview-images-before-uploading
+                var input = event.target;
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        this.imgSrc = e.target.result;
+                    }.bind(this);
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }, // previewThumbnail()
+
+
+            clearThumbnail: function() {
+                this.imgSrc = '';
+            }, // clearThumbnail()
 
 
             removeFamilyPhoto: function() {
@@ -71,7 +100,7 @@
                     }.bind(this))
 
                     .catch(function(response){
-                        console.log('no?')
+                        // console.log('photo delete failed');
                         this.loading = false;
                     }.bind(this));
             }, // removeFamilyPhoto()
