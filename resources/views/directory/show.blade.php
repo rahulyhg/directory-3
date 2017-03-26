@@ -12,7 +12,7 @@
             @if($family->thumbnail)
             <div style="float:right;"><img src="/public/directory/thb/{{ $family->thumbnail }}" alt="{{ $family->name }}"></div>
             @endif
-            
+
             <h1>{{ $family->name }}</h1>
 
             <hr />
@@ -27,14 +27,34 @@
             <hr />
 
             <ul class="list-group" style="margin-top: 30px;">
-                @foreach ($family->members as $member)
-                    <li class="list-group-item">
-                        <h4>{{ $member->first_name }} {{ $member->last_name }}</h4>
-                        @if ($member->email){{ $member->email }}<br />@endif
-                        @if ($member->mobile){{ $member->mobile }}<br />@endif
-                        @if ($member->birthday){{ $member->birthday->format('F j') }}<br />@endif
+                @if($family->head)
+                <li class="list-family-head list-group-item">
+                    <h4>{{ $family->head->first_name }} {{ $family->head->last_name }}</h4>
+                    @if ($family->head->email){{ $family->head->email }}<br />@endif
+                    @if ($family->head->mobile){{ $family->head->mobile }}<br />@endif
+                    @if ($family->head->birthday){{ $family->head->birthday->format('F j') }}<br />@endif
+                </li>
+                @endif
+
+                @if($family->spouse)
+                <li class="list-family-spouse list-group-item">
+                    <h4>{{ $family->spouse->first_name }} {{ $family->spouse->last_name }}</h4>
+                    @if ($family->spouse->email){{ $family->spouse->email }}<br />@endif
+                    @if ($family->spouse->mobile){{ $family->spouse->mobile }}<br />@endif
+                    @if ($family->spouse->birthday){{ $family->spouse->birthday->format('F j') }}<br />@endif
+                </li>
+                @endif
+
+                @if($family->dependants)
+                    @foreach($family->dependants as $child)
+                    <li class="list-family-dependant list-group-item">
+                        <h4>{{ $child->first_name }} {{ $child->last_name }}</h4>
+                        @if ($child->email){{ $child->email }}<br />@endif
+                        @if ($child->mobile){{ $child->mobile }}<br />@endif
+                        @if ($child->birthday){{ $child->birthday->format('F j') }}<br />@endif
                     </li>
-                @endforeach
+                    @endforeach
+                @endif
             </ul>
 
             <hr />
