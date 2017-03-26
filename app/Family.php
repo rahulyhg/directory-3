@@ -53,4 +53,22 @@ class Family extends Model
     {
         return $this->hasOne(Member::class)->where('family_role_id', '=', 1);
     }
+
+
+    /*
+     * A family can have a spouse 
+     */
+    public function spouse()
+    {
+        return $this->hasOne(Member::class)->where('family_role_id', '=', 2);
+    }
+
+
+    /*
+     * A family can have many dependants
+     */
+    public function dependants()
+    {
+        return $this->hasMany(Member::class)->where('family_role_id', '=', 3);
+    }
 }

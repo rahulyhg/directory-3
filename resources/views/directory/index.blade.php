@@ -34,29 +34,25 @@
                     </div>
                     <div class="family-members">
                         <span class="family-head">
-                        @foreach ($family->members as $member)
-                            @if($member->family_role_id == 1)
-                                {{ $member->first_name }}
+                            @if($family->head)
+                                {{ $family->head->first_name }}
                             @endif
-                        @endforeach
                         </span>
 
                         <span class="family-spouse">
-                        @foreach ($family->members as $member)
-                            @if($member->family_role_id == 2)
-                                &amp; {{ $member->first_name }}
+                            @if($family->spouse)
+                                &amp; {{ $family->spouse->first_name }}
                             @endif
-                        @endforeach
                         </span>
 
                         <br>
 
                         <span class="family-kids">
-                        @foreach ($family->members as $member)
-                            @if($member->family_role_id == 3)
-                                {{ $member->first_name }},
+                            @if($family->dependants)
+                                @foreach($family->dependants as $child)
+                                    {{ $child->first_name }}@if($family->dependants->last() !== $child), @endif
+                                @endforeach
                             @endif
-                        @endforeach
                         </span>
                     </div>
 
