@@ -106,25 +106,17 @@
                 <i class="fa fa-camera" aria-hidden="true"></i>Family Photo
             </div>
             <div class="panel-body panel-family-photo">
-                <family-photo slug="{{ $family->slug }}"></family-photo>
-
-                <!-- <?php if(isset($family) && isset($family->thumbnail)) { ?>
-                    <img style="max-width: 100%;" src="/public/directory/thb/{{ $family->thumbnail }}" alt="{{ $family->name }}">
-                    <a class="btn btn-delete"><i class="fa fa-times" aria-hidden="true"></i></a>
-
-
-
+                <?php if(isset($family)) { ?>
+                    <family-photo slug="{{ $family->slug }}"></family-photo>
                 <?php } else { ?>
-                    <label style="cursor:pointer; text-align:center; display:block; padding:10px; color:#CCC; font-weight:normal;" for="family-photo">
-                        <i style="font-size:30px; margin:0;" class="fa fa-upload" aria-hidden="true"></i><br />
-                        <span style="font-size:14px;">Upload a Photo</span>
-                    </label>
-                    {!! Form::file('photo', ['id' => 'family-photo', 'class' => 'hidden']) !!}
+                    <family-photo slug=""></family-photo>
                 <?php } ?>
 
+                <!--
                 <div class="form-group @if ($errors->has('photo')) has-error @endif">
                     @if ($errors->has('photo')) <p class="help-block error">{{ $errors->first('photo') }}</p> @endif
-                </div> -->
+                </div>
+                -->
             </div>
 
         </div>
