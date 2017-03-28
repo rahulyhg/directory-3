@@ -136,11 +136,28 @@
                     <span class="action-btns-no-text pull-right"><a href="/members/create" class="btn btn-default" style="padding: 0 6px" title="Add a Member"><i class="fa fa-plus"></i></a></span>
                 </div>
                 <div class="panel-body">
-                    @foreach($members as $member)
-                        <div class="fam-member">
-                            <a href="{{ url('/members/' . $member->id . '/edit') }}">{{ $member->first_name }}</a>
-                        </div>
-                    @endforeach
+
+
+                    @if($family->head)
+                    <div class="fam-member">
+                        <a href="{{ url('/members/' . $family->head->id . '/edit') }}">{{ $family->head->first_name }}</a>
+                    </div>
+                    @endif
+
+                    @if($family->spouse)
+                    <div class="fam-member">
+                        <a href="{{ url('/members/' . $family->spouse->id . '/edit') }}">{{ $family->spouse->first_name }}</a>
+                    </div>
+                    @endif
+
+                    @if($family->dependants)
+                        @foreach($family->dependants as $child)
+                            <div class="fam-member">
+                                <a href="{{ url('/members/' . $child->id . '/edit') }}">{{ $child->first_name }}</a>
+                            </div>
+                        @endforeach
+                    @endif
+
                 </div>
             </div>
         <?php } ?>
