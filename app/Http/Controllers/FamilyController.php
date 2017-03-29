@@ -199,7 +199,7 @@ class FamilyController extends Controller
             // Make thumbnail
             $img = Image::make($request->file('photo'));
             $img->fit(
-                320, 
+                320,
                 240,
                 function ($constraint) {
                     $constraint->upsize();

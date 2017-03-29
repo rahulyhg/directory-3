@@ -7,6 +7,7 @@ use App\Member;
 use App\Family;
 use App\FamilyRole;
 use App\Http\Requests\MemberRequest;
+use Session;
 
 
 class MemberController extends Controller
@@ -19,21 +20,41 @@ class MemberController extends Controller
 
     public function index()
     {
-
+        return redirect('/');
     }
+
 
     public function create()
     {
+        // Grab the family session data passed back from FamilyController@store
+        $family = Session::get('family');
+
+        if (isset($family)) {
+            $famId = $family->id;
+            $famName = $family->name;
+        } else {
+            $famId = null;
+            $famName = null;
+        }
+
+
+        // Create an associative array of families, 'id' => 'family name, head first'
+        $raw_families = Family::all();
+        $families = [];
+        foreach ($raw_families as $fam) {
+            if ($fam->head) {
+                $families[$fam->id] = $fam->name . ', ' . $fam->head->first_name;
+            } else{
+                $families[$fam->id] = $fam->name;
+            }
+        }
+
+        // Helper arrays...
         $statuses = ['Active' => 1, 'Closed' => 2];
-
-        $families = Family::all();
-        $families = array_pluck($families, 'name', 'id');
-
         $family_roles = [1 => 'Head', 2 => 'Spouse', 3 => 'Dependant'];
-
         $genders = ['male' => 'Male', 'female' => 'Female'];
 
-        return view('members.create', compact('families', 'statuses', 'family_roles', 'genders'));
+        return view('members.create', compact('famId', 'famName', 'families', 'statuses', 'family_roles', 'genders'));
     }
 
 
@@ -55,16 +76,35 @@ class MemberController extends Controller
     {
         $member = Member::where('id', '=', $id)->firstOrFail();
 
+        // Grab the family session data passed back from FamilyController@store
+        $family = Session::get('family');
+
+        if (isset($family)) {
+            $famId = $family->id;
+            $famName = $family->name;
+        } else {
+            $famId = null;
+            $famName = null;
+        }
+
+
+        // Create an associative array of families, 'id' => 'family name, head first'
+        $raw_families = Family::all();
+        $families = [];
+        foreach ($raw_families as $fam) {
+            if ($fam->head) {
+                $families[$fam->id] = $fam->name . ', ' . $fam->head->first_name;
+            } else{
+                $families[$fam->id] = $fam->name;
+            }
+        }
+
+        // Helper arrays...
         $statuses = ['Active' => 1, 'Closed' => 2];
-
-        $families = Family::all();
-        $families = array_pluck($families, 'name', 'id');
-
         $family_roles = [1 => 'Head', 2 => 'Spouse', 3 => 'Dependant'];
-
         $genders = ['male' => 'Male', 'female' => 'Female'];
 
-        return view('members.edit', compact('member', 'statuses', 'families', 'family_roles', 'genders'));
+        return view('members.edit', compact('famId', 'famName', 'families', 'member', 'statuses', 'family_roles', 'genders'));
     }
 
 

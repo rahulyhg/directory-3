@@ -1,6 +1,5 @@
 
     <div class="col-md-9">
-        <p>TEMP: {{ session('family') }}</p>
         <div class="panel panel-info">
             <div class="panel-heading">
                 <i class="fa fa-users" aria-hidden="true"></i>Family Information
@@ -9,7 +8,7 @@
                 <div class="form-group">
                     <div class="col-sm-6 @if ($errors->has('family_id')) has-error @endif" style="padding-left:0;">
                         {!! Form::label('family_id', 'Select Family') !!}
-                        {!! Form::select('family_id', [null => '-- Please Select --'] + $families, null, ['class' => 'form-control', 'id' => 'member-family']) !!}
+                        {!! Form::select('family_id', [null => '-- Please Select --'] + $families, $famId, ['class' => 'form-control', 'id' => 'member-family']) !!}
                         @if ($errors->has('family_id')) <p class="help-block error">{{ $errors->first('family_id') }}</p> @endif
                     </div>
                     <div class="col-sm-6 @if ($errors->has('family_role_id')) has-error @endif" style="padding-right:0;">
@@ -36,7 +35,7 @@
 
                     <div class="col-sm-6 @if ($errors->has('last_name')) has-error @endif" style="padding-right:0;">
                         {!! Form::label('last_name', 'Last Name') !!}
-                        {!! Form::text('last_name', null, ['class' => 'form-control', 'id' => 'member-last-name']) !!}
+                        {!! Form::text('last_name', $famName, ['class' => 'form-control', 'id' => 'member-last-name']) !!}
                         @if ($errors->has('last_name')) <p class="help-block error">{{ $errors->first('last_name') }}</p> @endif
                     </div>
                 </div>
