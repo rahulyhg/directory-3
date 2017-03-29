@@ -39,7 +39,7 @@ class MemberController extends Controller
 
 
         // Create an associative array of families, 'id' => 'family name, head first'
-        $raw_families = Family::all();
+        $raw_families = Family::orderBy('name', 'asc')->get();
         $families = [];
         foreach ($raw_families as $fam) {
             if ($fam->head) {
@@ -89,7 +89,7 @@ class MemberController extends Controller
 
 
         // Create an associative array of families, 'id' => 'family name, head first'
-        $raw_families = Family::all();
+        $raw_families = Family::orderBy('name', 'asc')->get();
         $families = [];
         foreach ($raw_families as $fam) {
             if ($fam->head) {
