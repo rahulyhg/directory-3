@@ -12,7 +12,7 @@
 
         <div class="row">
             {!! Form::open (['method' => 'POST', 'action' => ['MemberController@store'], 'files' => true]) !!}
-                @include('members.form', ['submitButtonText' => 'Add Member'])
+                @include('members.form', ['submitButtonText' => 'Save', 'addAnotherButtonText' => 'Save and Add More'])
             {!! Form::close() !!}
         </div>
 
@@ -25,5 +25,9 @@
     <script src="/js/jquery.mask.min.js"></script>
     <script>
     	$('#member-mobile').mask('(000) 000-0000');
+
+        $('.btn-save-add').on('click', function(){
+            $('.member-add-another').val('true');
+        });
     </script>
 @endsection

@@ -29,13 +29,13 @@
                 <div class="form-group clearfix">
                     <div class="col-sm-6 @if ($errors->has('first_name')) has-error @endif" style="padding-left:0;">
                         {!! Form::label('first_name', 'First Name') !!}
-                        {!! Form::text('first_name', null, ['class' => 'form-control', 'id' => 'member-first-name']) !!}
+                        {!! Form::text('first_name', null, ['class' => 'form-control', 'id' => 'member-first-name', 'placeholder' => 'First Name']) !!}
                         @if ($errors->has('first_name')) <p class="help-block error">{{ $errors->first('first_name') }}</p> @endif
                     </div>
 
                     <div class="col-sm-6 @if ($errors->has('last_name')) has-error @endif" style="padding-right:0;">
                         {!! Form::label('last_name', 'Last Name') !!}
-                        {!! Form::text('last_name', $famName, ['class' => 'form-control', 'id' => 'member-last-name']) !!}
+                        {!! Form::text('last_name', $famName, ['class' => 'form-control', 'id' => 'member-last-name', 'placeholder' => 'Last Name']) !!}
                         @if ($errors->has('last_name')) <p class="help-block error">{{ $errors->first('last_name') }}</p> @endif
                     </div>
                 </div>
@@ -43,13 +43,13 @@
                 <div class="form-group clearfix">
                     <div class="col-sm-6 @if ($errors->has('email')) has-error @endif" style="padding-left:0;">
                         {!! Form::label('email', 'Email') !!}
-                        {!! Form::email('email', null, ['class' => 'form-control', 'id' => 'member-email']) !!}
+                        {!! Form::email('email', null, ['class' => 'form-control', 'id' => 'member-email', 'placeholder' => 'Email']) !!}
                         @if ($errors->has('email')) <p class="help-block error">{{ $errors->first('email') }}</p> @endif
                     </div>
 
                     <div class="col-sm-6 @if ($errors->has('mobile')) has-error @endif" style="padding-right:0;">
                         {!! Form::label('mobile', 'Mobile Phone') !!}
-                        {!! Form::text('mobile', null, ['class' => 'form-control', 'id' => 'member-mobile']) !!}
+                        {!! Form::text('mobile', null, ['class' => 'form-control', 'id' => 'member-mobile', 'placeholder' => 'Mobile']) !!}
                         @if ($errors->has('mobile')) <p class="help-block error">{{ $errors->first('mobile') }}</p> @endif
                     </div>
                 </div>
@@ -98,7 +98,13 @@
 
             </div>
             <div class="panel-footer">
-                {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary btn-block form-control']) !!}
+                <input type="hidden" name="addAnother" class="member-add-another" value="false">
+                {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary btn-save-only btn-block form-control']) !!}
+
+                <?php if (isset($addAnotherButtonText)){ ?>
+                    <p class="text-center" style="margin:0;">or</p>
+                    {!! Form::submit($addAnotherButtonText, ['class' => 'btn btn-default btn-save-add btn-block form-control']) !!}
+                <?php } ?>
             </div>
         </div>
 

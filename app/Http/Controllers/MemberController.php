@@ -67,7 +67,17 @@ class MemberController extends Controller
 
         flash()->success('The member was added.');
 
-        return redirect('members/create');
+        // Redirect back to form w/ family object IF the user clicks to "Save and Add More"
+        if ($request->addAnother == 'true') {
+            // Load session with the member's family for quick adding more members
+            $family = $member->family;
+
+            // Redirect back to create form with family object in session
+            return redirect('members/create')->with(compact('family'));
+        }
+
+        return redirect('/admin');
+
     }
 
 
